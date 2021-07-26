@@ -3,6 +3,8 @@ object DataModule1: TDataModule1
   Height = 414
   Width = 608
   object IBDatabase1: TIBDatabase
+    Params.Strings = (
+      'sql_dialect=1')
     LoginPrompt = False
     ServerType = 'IBServer'
     SQLDialect = 1

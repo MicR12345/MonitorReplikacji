@@ -29,8 +29,6 @@ type
     cxGrid2DBTableView1D0B1: TcxGridDBColumn;
     cxGrid2DBTableView1D0B2: TcxGridDBColumn;
     cxGrid2DBTableView1D1B1: TcxGridDBColumn;
-    cxGrid2DBTableView1D1B2: TcxGridDBColumn;
-    cxGrid2DBTableView1D2B1: TcxGridDBColumn;
     cxGrid2DBTableView1D2B2: TcxGridDBColumn;
     cxGrid2DBTableView1B: TcxGridDBColumn;
     procedure Button1Click(Sender: TObject);

@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Data.DB, IBX.IBDatabase, IBX.IBCustomDataSet,
-  IBX.IBUpdateSQL, IBX.IBQuery;
+  IBX.IBUpdateSQL, IBX.IBQuery, Datasnap.DBClient;
 
 type
   TDataModule1 = class(TDataModule)

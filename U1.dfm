@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'Form3'
-  ClientHeight = 418
-  ClientWidth = 784
+  ClientHeight = 340
+  ClientWidth = 691
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,7 +14,7 @@ object Form3: TForm3
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 685
+    Left = 601
     Top = 8
     Width = 82
     Height = 25
@@ -25,8 +25,8 @@ object Form3: TForm3
   object cxGrid2: TcxGrid
     Left = 0
     Top = 135
-    Width = 783
-    Height = 282
+    Width = 683
+    Height = 202
     TabOrder = 1
     object cxGrid2DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
@@ -94,20 +94,12 @@ object Form3: TForm3
         DataBinding.FieldName = 'D0B1'
         Options.Editing = False
       end
-      object cxGrid2DBTableView1D0B2: TcxGridDBColumn
-        DataBinding.FieldName = 'D0B2'
-        Options.Editing = False
-      end
       object cxGrid2DBTableView1D1B1: TcxGridDBColumn
         DataBinding.FieldName = 'D1B1'
         Options.Editing = False
       end
-      object cxGrid2DBTableView1D1B2: TcxGridDBColumn
-        DataBinding.FieldName = 'D1B2'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1D2B1: TcxGridDBColumn
-        DataBinding.FieldName = 'D2B1'
+      object cxGrid2DBTableView1D0B2: TcxGridDBColumn
+        DataBinding.FieldName = 'D0B2'
         Options.Editing = False
       end
       object cxGrid2DBTableView1D2B2: TcxGridDBColumn
@@ -150,7 +142,7 @@ object Form3: TForm3
     Height = 64
     Width = 64
     FormatVersion = 1
-    DesignInfo = 524928
+    DesignInfo = 524840
     ImageInfo = <
       item
         Image.Data = {
