@@ -12,7 +12,9 @@ uses
   IBX.IBCustomDataSet, IBX.IBDatabase, Vcl.StdCtrls, IBX.IBUpdateSQL,
   cxDataControllerConditionalFormattingRulesManagerDialog, cxImage,
   cxImageComboBox, System.ImageList, Vcl.ImgList, cxImageList, cxContainer,
-  cxTextEdit, cxMaskEdit, cxDropDownEdit;
+  cxTextEdit, cxMaskEdit, cxDropDownEdit, Vcl.ExtCtrls, System.Rtti,
+  System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
+  Vcl.Bind.DBEngExt, Data.Bind.Components;
 
 type
   TForm3 = class(TForm)
@@ -31,9 +33,18 @@ type
     cxGrid2DBTableView1D1B1: TcxGridDBColumn;
     cxGrid2DBTableView1D2B2: TcxGridDBColumn;
     cxGrid2DBTableView1B: TcxGridDBColumn;
+    Timer1: TTimer;
+    StaticText1: TStaticText;
+    EditInterval: TEdit;
+    BindingsList1: TBindingsList;
+    AutoRefreshCheckBox: TCheckBox;
+    LinkControlToPropertyEnabled: TLinkControlToProperty;
+    LinkControlToPropertyEnabled2: TLinkControlToProperty;
     procedure Button1Click(Sender: TObject);
     procedure ConfigButtonClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure EditIntervalChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,8 +59,11 @@ implementation
 uses DataModule,UnitDBConfig;
 procedure TForm3.Button1Click(Sender: TObject);
 begin
+  if DataModule1.IBQuery1.Active then
+  begin
   cxGrid2DBTableView1.DataController.DataSet.Refresh;
   cxGrid2DBTableView1.DataController.RefreshExternalData;
+  end;
 end;
 
 
@@ -66,6 +80,16 @@ configform.ShowModal;
 if configform.ModalResult=mrOK then
   begin
   end;
+end;
+
+procedure TForm3.EditIntervalChange(Sender: TObject);
+begin
+Timer1.Interval:=StrToInt(EditInterval.Text)*1000;
+end;
+
+procedure TForm3.Timer1Timer(Sender: TObject);
+begin
+Button1.Click;
 end;
 
 end.

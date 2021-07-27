@@ -137,12 +137,38 @@ object Form3: TForm3
     TabOrder = 2
     OnClick = ConfigButtonClick
   end
+  object StaticText1: TStaticText
+    Left = 416
+    Top = 8
+    Width = 105
+    Height = 17
+    Caption = 'Czas odswierzania(s)'
+    TabOrder = 3
+  end
+  object EditInterval: TEdit
+    Left = 416
+    Top = 23
+    Width = 83
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 4
+    Text = '30'
+    OnChange = EditIntervalChange
+  end
+  object AutoRefreshCheckBox: TCheckBox
+    Left = 288
+    Top = 8
+    Width = 105
+    Height = 17
+    Caption = 'Auto Odswierzanie'
+    TabOrder = 5
+  end
   object cxImageList1: TcxImageList
     SourceDPI = 96
     Height = 64
     Width = 64
     FormatVersion = 1
-    DesignInfo = 524840
+    DesignInfo = 5767816
     ImageInfo = <
       item
         Image.Data = {
@@ -1178,5 +1204,33 @@ object Form3: TForm3
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       end>
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 30000
+    OnTimer = Timer1Timer
+    Left = 552
+    Top = 8
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 100
+    Top = 5
+    object LinkControlToPropertyEnabled: TLinkControlToProperty
+      Category = 'Quick Bindings'
+      Control = AutoRefreshCheckBox
+      Track = True
+      Component = Timer1
+      ComponentProperty = 'Enabled'
+    end
+    object LinkControlToPropertyEnabled2: TLinkControlToProperty
+      Category = 'Quick Bindings'
+      Control = AutoRefreshCheckBox
+      Track = True
+      Component = EditInterval
+      ComponentProperty = 'Enabled'
+      InitializeControlValue = False
+    end
   end
 end
