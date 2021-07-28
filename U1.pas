@@ -89,7 +89,12 @@ end;
 
 procedure TForm3.Timer1Timer(Sender: TObject);
 begin
+try
 Button1.Click;
+Timer1.Enabled:= False;
+finally
+Timer1.Enabled:=True;
+end;
 end;
 
 end.

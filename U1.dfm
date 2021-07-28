@@ -2,9 +2,10 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'Form3'
-  ClientHeight = 340
-  ClientWidth = 691
+  ClientHeight = 417
+  ClientWidth = 683
   Color = clBtnFace
+  Constraints.MaxWidth = 700
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -24,10 +25,14 @@ object Form3: TForm3
   end
   object cxGrid2: TcxGrid
     Left = 0
-    Top = 135
+    Top = 146
     Width = 683
-    Height = 202
+    Height = 271
+    Align = alBottom
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 1
+    ExplicitTop = 144
+    ExplicitHeight = 370
     object cxGrid2DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.First.Visible = True
