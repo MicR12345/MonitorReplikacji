@@ -4,22 +4,16 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
-  cxLookAndFeelPainters, dxSkinsCore, cxStyles, cxCustomData, cxFilter, cxData,
-  cxDataStorage, cxEdit, cxNavigator, dxDateRanges, dxScrollbarAnnotations,
-  Data.DB, cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxGridLevel, cxClasses, cxGridCustomView, cxGrid, IBX.IBQuery,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Data.DB, IBX.IBQuery,
   IBX.IBCustomDataSet, IBX.IBDatabase, Vcl.StdCtrls, IBX.IBUpdateSQL,
-  cxDataControllerConditionalFormattingRulesManagerDialog, cxImage,
-  cxImageComboBox, System.ImageList, Vcl.ImgList, cxImageList, cxContainer,
-  cxTextEdit, cxMaskEdit, cxDropDownEdit, Vcl.ExtCtrls, System.Rtti,
+  System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Grids, Vcl.DBGrids;
 
 type
   TForm3 = class(TForm)
     Button1: TButton;
-    cxImageList1: TcxImageList;
     ConfigButton: TButton;
     Timer1: TTimer;
     StaticText1: TStaticText;
