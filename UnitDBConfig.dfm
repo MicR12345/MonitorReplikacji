@@ -27,7 +27,7 @@ object DBFormConfig: TDBFormConfig
       441
       37)
     object Button1: TButton
-      Left = 11
+      Left = 8
       Top = 6
       Width = 75
       Height = 25

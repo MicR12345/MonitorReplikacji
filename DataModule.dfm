@@ -3,8 +3,12 @@ object DataModule1: TDataModule1
   Height = 414
   Width = 608
   object IBDatabase1: TIBDatabase
+    Connected = True
+    DatabaseName = 'N:\R45.fdb'
     Params.Strings = (
-      'sql_dialect=1')
+      'sql_dialect=1'
+      'user_name=SYSDBA'
+      'password=masterkey')
     LoginPrompt = False
     ServerType = 'IBServer'
     SQLDialect = 1
@@ -57,7 +61,6 @@ object DataModule1: TDataModule1
       end>
     object IBQuery1SID: TIntegerField
       FieldName = 'SID'
-      Origin = 'NVC_IMPORTY_I_CHECK.SID'
     end
     object IBQuery1SDATE: TDateTimeField
       FieldName = 'SDATE'
@@ -83,14 +86,6 @@ object DataModule1: TDataModule1
       FieldName = 'D1B1'
       Origin = 'NVC_IMPORTY_I_CHECK.D1B1'
     end
-    object IBQuery1D1B2: TIntegerField
-      FieldName = 'D1B2'
-      Origin = 'NVC_IMPORTY_I_CHECK.D1B2'
-    end
-    object IBQuery1D2B1: TIntegerField
-      FieldName = 'D2B1'
-      Origin = 'NVC_IMPORTY_I_CHECK.D2B1'
-    end
     object IBQuery1D2B2: TIntegerField
       FieldName = 'D2B2'
       Origin = 'NVC_IMPORTY_I_CHECK.D2B2'
@@ -106,6 +101,7 @@ object DataModule1: TDataModule1
     Top = 8
   end
   object IBTransaction1: TIBTransaction
+    Active = True
     DefaultDatabase = IBDatabase1
     Left = 504
     Top = 8
@@ -132,5 +128,75 @@ object DataModule1: TDataModule1
       '')
     Left = 464
     Top = 8
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 440
+    Top = 120
+    object ClientDataSet1SID: TIntegerField
+      FieldName = 'SID'
+    end
+    object ClientDataSet1Data: TDateTimeField
+      FieldName = 'Data'
+    end
+    object ClientDataSet1Import_Quantity: TIntegerField
+      FieldName = 'Import_Quantity'
+    end
+    object ClientDataSet1Order_Quantity: TIntegerField
+      FieldName = 'Order_Quantity'
+    end
+    object ClientDataSet1D0B1: TIntegerField
+      FieldName = 'D0B1'
+    end
+    object ClientDataSet1D0B2: TIntegerField
+      FieldName = 'D0B2'
+    end
+    object ClientDataSet1D1B1: TIntegerField
+      FieldName = 'D1B1'
+    end
+    object ClientDataSet1D2B2: TIntegerField
+      FieldName = 'D2B2'
+    end
+    object ClientDataSet1CorrectWar: TIntegerField
+      FieldName = 'CorrectWar'
+    end
+    object ClientDataSet1IsCorrect: TIntegerField
+      FieldName = 'IsCorrect'
+    end
+  end
+  object DataSource2: TDataSource
+    DataSet = ClientDataSet1
+    Left = 368
+    Top = 120
+  end
+  object IBQuery2: TIBQuery
+    Database = IBDatabase1
+    BufferChunks = 1000
+    CachedUpdates = False
+    ParamCheck = True
+    SQL.Strings = (
+      'SELECT p.ID, p.OP, p.WAR_IN_DB FROM NVC_WARIANTY (:SID) p;')
+    Left = 440
+    Top = 168
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SID'
+        ParamType = ptInput
+      end>
+    object IBQuery2ID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'NVC_WARIANTY.ID'
+    end
+    object IBQuery2OP: TIBStringField
+      FieldName = 'OP'
+      Origin = 'NVC_WARIANTY.OP'
+      Size = 3000
+    end
+    object IBQuery2WAR_IN_DB: TIntegerField
+      FieldName = 'WAR_IN_DB'
+      Origin = 'NVC_WARIANTY.WAR_IN_DB'
+    end
   end
 end

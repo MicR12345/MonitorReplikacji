@@ -2,10 +2,9 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'Form3'
-  ClientHeight = 417
-  ClientWidth = 683
+  ClientHeight = 269
+  ClientWidth = 850
   Color = clBtnFace
-  Constraints.MaxWidth = 700
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,7 +14,7 @@ object Form3: TForm3
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 601
+    Left = 761
     Top = 8
     Width = 82
     Height = 25
@@ -23,123 +22,13 @@ object Form3: TForm3
     TabOrder = 0
     OnClick = Button1Click
   end
-  object cxGrid2: TcxGrid
-    Left = 0
-    Top = 146
-    Width = 683
-    Height = 271
-    Align = alBottom
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    TabOrder = 1
-    ExplicitTop = 144
-    ExplicitHeight = 370
-    object cxGrid2DBTableView1: TcxGridDBTableView
-      Navigator.Buttons.CustomButtons = <>
-      Navigator.Buttons.First.Visible = True
-      Navigator.Buttons.PriorPage.Visible = True
-      Navigator.Buttons.Prior.Visible = True
-      Navigator.Buttons.Next.Visible = True
-      Navigator.Buttons.NextPage.Visible = True
-      Navigator.Buttons.Last.Visible = True
-      Navigator.Buttons.Insert.Visible = True
-      Navigator.Buttons.Append.Visible = False
-      Navigator.Buttons.Delete.Visible = True
-      Navigator.Buttons.Edit.Visible = True
-      Navigator.Buttons.Post.Visible = True
-      Navigator.Buttons.Cancel.Visible = True
-      Navigator.Buttons.Refresh.Visible = True
-      Navigator.Buttons.SaveBookmark.Visible = True
-      Navigator.Buttons.GotoBookmark.Visible = True
-      Navigator.Buttons.Filter.Visible = True
-      FilterBox.Visible = fvNever
-      ScrollbarAnnotations.CustomAnnotations = <>
-      DataController.DataSource = DataModule1.DataSource1
-      DataController.KeyFieldNames = 'SID'
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      OptionsBehavior.FocusCellOnTab = True
-      OptionsData.Deleting = False
-      OptionsData.DeletingConfirmation = False
-      OptionsData.Editing = False
-      OptionsData.Inserting = False
-      OptionsView.CellAutoHeight = True
-      OptionsView.GridLines = glVertical
-      OptionsView.GroupByBox = False
-      OptionsView.HeaderFilterButtonShowMode = fbmSmartTag
-      OptionsView.ShowColumnFilterButtons = sfbWhenSelected
-      ConditionalFormatting = {
-        010000000A000000310000005400640078005300700072006500610064005300
-        680065006500740043006F006E0064006900740069006F006E0061006C004600
-        6F0072006D0061007400740069006E006700520075006C006500450078007000
-        720065007300730069006F006E00870000000000000000000000FFFFFF7FFFFF
-        FF7F0001FF0000000E00000007000000430061006C0069006200720069000001
-        0000000020000000200000000020000000002000000000200000000020000700
-        0000470045004E004500520041004C0000000000000200000000000000000109
-        0000003D005B0044003100420031005D003D00300000000000}
-      object cxGrid2DBTableView1SID: TcxGridDBColumn
-        DataBinding.FieldName = 'SID'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1SDATE: TcxGridDBColumn
-        DataBinding.FieldName = 'SDATE'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1IPQ: TcxGridDBColumn
-        DataBinding.FieldName = 'IPQ'
-        Options.Editing = False
-        Width = 77
-      end
-      object cxGrid2DBTableView1OPQ: TcxGridDBColumn
-        DataBinding.FieldName = 'OPQ'
-        Options.Editing = False
-        Width = 81
-      end
-      object cxGrid2DBTableView1D0B1: TcxGridDBColumn
-        DataBinding.FieldName = 'D0B1'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1D1B1: TcxGridDBColumn
-        DataBinding.FieldName = 'D1B1'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1D0B2: TcxGridDBColumn
-        DataBinding.FieldName = 'D0B2'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1D2B2: TcxGridDBColumn
-        DataBinding.FieldName = 'D2B2'
-        Options.Editing = False
-      end
-      object cxGrid2DBTableView1B: TcxGridDBColumn
-        DataBinding.FieldName = 'B'
-        PropertiesClassName = 'TcxImageComboBoxProperties'
-        Properties.Images = cxImageList1
-        Properties.Items = <
-          item
-            ImageIndex = 0
-            Tag = 1
-            Value = 1
-          end
-          item
-            ImageIndex = 1
-            Value = 0
-          end>
-        Options.Editing = False
-        Width = 63
-      end
-    end
-    object cxGrid2Level1: TcxGridLevel
-      GridView = cxGrid2DBTableView1
-    end
-  end
   object ConfigButton: TButton
     Left = 8
     Top = 8
     Width = 75
     Height = 25
     Caption = 'Settings'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = ConfigButtonClick
   end
   object StaticText1: TStaticText
@@ -148,7 +37,7 @@ object Form3: TForm3
     Width = 105
     Height = 17
     Caption = 'Czas odswierzania(s)'
-    TabOrder = 3
+    TabOrder = 2
   end
   object EditInterval: TEdit
     Left = 416
@@ -156,7 +45,7 @@ object Form3: TForm3
     Width = 83
     Height = 21
     NumbersOnly = True
-    TabOrder = 4
+    TabOrder = 3
     Text = '30'
     OnChange = EditIntervalChange
   end
@@ -166,14 +55,82 @@ object Form3: TForm3
     Width = 105
     Height = 17
     Caption = 'Auto Odswierzanie'
+    TabOrder = 4
+  end
+  object DBGrid2: TDBGrid
+    Left = 0
+    Top = 108
+    Width = 850
+    Height = 161
+    Align = alBottom
+    DataSource = DataModule1.DataSource2
+    ReadOnly = True
     TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'SID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Data'
+        Width = 73
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Import_Quantity'
+        Width = 66
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Order_Quantity'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'D0B1'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'D0B2'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'D1B1'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'D2B2'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CorrectWar'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IsCorrect'
+        Visible = True
+      end>
   end
   object cxImageList1: TcxImageList
     SourceDPI = 96
     Height = 64
     Width = 64
     FormatVersion = 1
-    DesignInfo = 5767816
+    DesignInfo = -524144
     ImageInfo = <
       item
         Image.Data = {
@@ -1221,7 +1178,7 @@ object Form3: TForm3
     Methods = <>
     OutputConverters = <>
     Left = 100
-    Top = 5
+    Top = 65525
     object LinkControlToPropertyEnabled: TLinkControlToProperty
       Category = 'Quick Bindings'
       Control = AutoRefreshCheckBox
