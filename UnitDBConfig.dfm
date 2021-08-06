@@ -17,18 +17,18 @@ object DBFormConfig: TDBFormConfig
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 322
+    Top = 310
     Width = 441
-    Height = 37
+    Height = 49
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 0
     DesignSize = (
       441
-      37)
+      49)
     object Button1: TButton
       Left = 8
-      Top = 6
+      Top = 14
       Width = 75
       Height = 25
       Anchors = [akTop, akRight]
@@ -40,7 +40,7 @@ object DBFormConfig: TDBFormConfig
     end
     object Button2: TButton
       Left = 356
-      Top = 6
+      Top = 14
       Width = 75
       Height = 25
       Anchors = [akTop, akRight]
@@ -49,6 +49,18 @@ object DBFormConfig: TDBFormConfig
       ModalResult = 2
       TabOrder = 1
       OnClick = Button2Click
+    end
+    object TotalProgress: TProgressBar
+      Left = 97
+      Top = 8
+      Width = 232
+      Height = 33
+      Smooth = True
+      BarColor = clLime
+      BackgroundColor = clSilver
+      Step = 1
+      TabOrder = 2
+      Visible = False
     end
   end
   object DB0Group: TGroupBox

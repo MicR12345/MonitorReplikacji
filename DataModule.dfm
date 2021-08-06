@@ -3,12 +3,8 @@ object DataModule1: TDataModule1
   Height = 414
   Width = 608
   object IBDatabase1: TIBDatabase
-    Connected = True
-    DatabaseName = 'N:\R45.fdb'
     Params.Strings = (
-      'sql_dialect=1'
-      'user_name=SYSDBA'
-      'password=masterkey')
+      'sql_dialect=1')
     LoginPrompt = False
     ServerType = 'IBServer'
     SQLDialect = 1
@@ -101,7 +97,6 @@ object DataModule1: TDataModule1
     Top = 8
   end
   object IBTransaction1: TIBTransaction
-    Active = True
     DefaultDatabase = IBDatabase1
     Left = 504
     Top = 8

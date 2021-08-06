@@ -32,16 +32,16 @@ object Form3: TForm3
     OnClick = ConfigButtonClick
   end
   object StaticText1: TStaticText
-    Left = 416
-    Top = 8
+    Left = 288
+    Top = 31
     Width = 105
     Height = 17
     Caption = 'Czas odswierzania(s)'
     TabOrder = 2
   end
   object EditInterval: TEdit
-    Left = 416
-    Top = 23
+    Left = 296
+    Top = 47
     Width = 83
     Height = 21
     NumbersOnly = True
@@ -71,6 +71,7 @@ object Form3: TForm3
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnDrawColumnCell = DBGrid2DrawColumnCell
     Columns = <
       item
         Expanded = False
@@ -122,21 +123,30 @@ object Form3: TForm3
       item
         Expanded = False
         FieldName = 'IsCorrect'
+        Width = 80
         Visible = True
       end>
+  end
+  object CheckBox1: TCheckBox
+    Left = 8
+    Top = 85
+    Width = 113
+    Height = 17
+    Caption = 'Poka'#380' tylko b'#322#281'dne'
+    TabOrder = 6
+    OnClick = CheckBox1Click
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 30000
     OnTimer = Timer1Timer
-    Left = 552
-    Top = 8
+    Left = 400
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
     Left = 100
-    Top = 65525
+    Top = 65533
     object LinkControlToPropertyEnabled: TLinkControlToProperty
       Category = 'Quick Bindings'
       Control = AutoRefreshCheckBox

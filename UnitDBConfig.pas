@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, System.StrUtils;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, System.StrUtils,
+  Vcl.ComCtrls;
 
 type
   TDBFormConfig = class(TForm)
@@ -32,6 +33,7 @@ type
     StaticText8: TStaticText;
     DB2ConnectionEdit: TEdit;
     StaticText9: TStaticText;
+    TotalProgress: TProgressBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
   private
@@ -65,8 +67,18 @@ DataModule1.IBQuery1.ParamByName('DB2PASSWORD').Value := DB2PasswordEdit.Text;
 DataModule1.IBDatabase1.Open;
 DataModule1.IBQuery1.Open;
 DataModule1.ClientDataSet1.CreateDataSet;
+TotalProgress.Max := 60000;
+TotalProgress.Show;
+DataModule1.IBQuery1.Last;
+TotalProgress.Step :=TotalProgress.Max div DataModule1.IBQuery1.RecordCount;
+DataModule1.IBQuery1.First;
 while not DataModule1.IBQuery1.Eof do
+begin
 try
+ TotalProgress.Position := TotalProgress.Position + TotalProgress.Step;
+ TotalProgress.Update;
+ DBFormConfig.Update;
+ Application.ProcessMessages;
  DataModule1.ClientDataSet1.Insert;
  DataModule1.ClientDataSet1SID.Value := DataModule1.IBQuery1SID.AsInteger;
  DataModule1.ClientDataSet1Data.Value := DataModule1.IBQuery1SDATE.AsDateTime;
@@ -79,9 +91,12 @@ try
  DataModule1.IBQuery2.Close;
  DataModule1.IBQuery2.ParamByName('SID').Value := DataModule1.IBQuery1SID.AsInteger;
  DataModule1.IBQuery2.Open;
+ DataModule1.IBQuery2.Last;
+ DataModule1.IBQuery2.First;
  var CorrectCount := 0;
  var TotalCount := 0;
  while not DataModule1.IBQuery2.Eof do
+ begin
  try
     var Opis : string;
     Opis := DataModule1.IBQuery2OP.AsString;
@@ -109,6 +124,7 @@ try
  finally
     DataModule1.IBQuery2.Next;
  end;
+ end;
  DataModule1.ClientDataSet1CorrectWar.Value := CorrectCount;
  if (TotalCount=CorrectCount) and (DataModule1.IBQuery1B.Value=1) then
                                  DataModule1.ClientDataSet1IsCorrect.Value := 1
@@ -117,7 +133,9 @@ try
 finally
  DataModule1.IBQuery1.Next;
 end;
-
+end;
+TotalProgress.Hide;
+TotalProgress.Position :=0;
 DBFormConfig.ModalResult := mrOK;
 end;
 

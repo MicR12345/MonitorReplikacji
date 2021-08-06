@@ -23,11 +23,15 @@ type
     LinkControlToPropertyEnabled: TLinkControlToProperty;
     LinkControlToPropertyEnabled2: TLinkControlToProperty;
     DBGrid2: TDBGrid;
+    CheckBox1: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure ConfigButtonClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure EditIntervalChange(Sender: TObject);
+    procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure CheckBox1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -108,6 +112,20 @@ begin
 DataModule1.IBQuery1.Open;
 end;
 
+procedure TForm3.CheckBox1Click(Sender: TObject);
+begin
+if CheckBox1.Checked then
+  begin
+    DBGrid2.DataSource.DataSet.Filter := 'IsCorrect = 0';
+    DBGrid2.DataSource.DataSet.Filtered:= True;
+  end
+else
+  begin
+    DBGrid2.DataSource.DataSet.Filter := '';
+    DBGrid2.DataSource.DataSet.Filtered:= False;
+  end;
+end;
+
 procedure TForm3.ConfigButtonClick(Sender: TObject);
 begin
 var configform : TDBFormConfig;
@@ -116,6 +134,15 @@ configform.ShowModal;
 if configform.ModalResult=mrOK then
   begin
   end;
+end;
+
+procedure TForm3.DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+if (Sender as TDBGrid).DataSource.DataSet.FieldByName('IsCorrect').Value=0 then
+(Sender as TDBGrid).Canvas.Brush.Color:=clRed;
+(Sender as TDBGrid).DefaultDrawColumnCell(Rect,DataCol,Column,State);
+
 end;
 
 procedure TForm3.EditIntervalChange(Sender: TObject);
