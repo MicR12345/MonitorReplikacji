@@ -3,8 +3,12 @@ object DataModule1: TDataModule1
   Height = 414
   Width = 608
   object IBDatabase1: TIBDatabase
+    Connected = True
+    DatabaseName = 'N:\R45.fdb'
     Params.Strings = (
-      'sql_dialect=1')
+      'sql_dialect=1'
+      'user_name=SYSDBA'
+      'password=masterkey')
     LoginPrompt = False
     ServerType = 'IBServer'
     SQLDialect = 1
@@ -171,7 +175,7 @@ object DataModule1: TDataModule1
     CachedUpdates = False
     ParamCheck = True
     SQL.Strings = (
-      'SELECT p.ID, p.OP, p.WAR_IN_DB FROM NVC_WARIANTY (:SID) p;')
+      'SELECT p.ID, p.OP,p.REF, p.WAR_IN_DB FROM NVC_WARIANTY (:SID) p;')
     Left = 440
     Top = 168
     ParamData = <
@@ -189,9 +193,33 @@ object DataModule1: TDataModule1
       Origin = 'NVC_WARIANTY.OP'
       Size = 3000
     end
+    object IBQuery2REF: TIntegerField
+      FieldName = 'REF'
+      Origin = 'NVC_WARIANTY.REF'
+    end
     object IBQuery2WAR_IN_DB: TIntegerField
       FieldName = 'WAR_IN_DB'
       Origin = 'NVC_WARIANTY.WAR_IN_DB'
     end
+  end
+  object DetailDataSet: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 440
+    Top = 224
+    object DetailDataSetSID: TIntegerField
+      FieldName = 'SID'
+    end
+    object DetailDataSetIMPORT_ORDER_ID: TIntegerField
+      FieldName = 'IMPORT_ORDER_ID'
+    end
+    object DetailDataSetREF_NS: TIntegerField
+      FieldName = 'REF_NS'
+    end
+  end
+  object DetailSource: TDataSource
+    DataSet = DetailDataSet
+    Left = 368
+    Top = 224
   end
 end

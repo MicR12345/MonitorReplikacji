@@ -1,12 +1,9 @@
 unit UnitDBConfig;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, System.StrUtils,
   Vcl.ComCtrls;
-
 type
   TDBFormConfig = class(TForm)
     Button1: TButton;
@@ -41,16 +38,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   DBFormConfig: TDBFormConfig;
-
 implementation
-
 {$R *.dfm}
-
 uses DataModule;
-
 procedure TDBFormConfig.Button1Click(Sender: TObject);
 begin
 DataModule1.IBDatabase1.Close;
@@ -67,6 +59,7 @@ DataModule1.IBQuery1.ParamByName('DB2PASSWORD').Value := DB2PasswordEdit.Text;
 DataModule1.IBDatabase1.Open;
 DataModule1.IBQuery1.Open;
 DataModule1.ClientDataSet1.CreateDataSet;
+DataModule1.DetailDataSet.CreateDataSet;
 TotalProgress.Max := 60000;
 TotalProgress.Show;
 DataModule1.IBQuery1.Last;
@@ -115,12 +108,31 @@ try
          if OutputStrings.Count-1=DataModule1.IBQuery2WAR_IN_DB.Value then
          CorrectCount := CorrectCount+1;}
          if WordCount=DataModule1.IBQuery2WAR_IN_DB.Value then
+         begin
          CorrectCount := CorrectCount+1;
+         TotalCount:=TotalCount+1;
+         end
+         else
+         begin
+           DataModule1.DetailDataSet.Insert;
+           DataModule1.DetailDataSetSID.Value := DataModule1.IBQuery1SID.AsInteger;
+           DataModule1.DetailDataSetIMPORT_ORDER_ID.Value := DataModule1.IBQuery2ID.AsInteger;
+           DataModule1.DetailDataSetREF_NS.Value := DataModule1.IBQuery2REF.AsInteger;
+           DataModule1.DetailDataSet.Post;
+         end;
        finally
          //OutputStrings.Free;
        end;
     end
-    else TotalCount:=TotalCount+1;
+    else
+    begin
+    TotalCount:=TotalCount+1;
+    DataModule1.DetailDataSet.Insert;
+    DataModule1.DetailDataSetSID.Value := DataModule1.IBQuery1SID.AsInteger;
+    DataModule1.DetailDataSetIMPORT_ORDER_ID.Value := DataModule1.IBQuery2ID.AsInteger;
+    DataModule1.DetailDataSetREF_NS.Value := DataModule1.IBQuery2REF.AsInteger;
+    DataModule1.DetailDataSet.Post;
+    end;
  finally
     DataModule1.IBQuery2.Next;
  end;
@@ -136,12 +148,13 @@ end;
 end;
 TotalProgress.Hide;
 TotalProgress.Position :=0;
+DataModule1.DetailDataSet.IndexFieldNames := 'SID';
+DataModule1.DetailDataSet.MasterSource :=DataModule1.DataSource2;
+DataModule1.DetailDataSet.MasterFields := 'SID';
 DBFormConfig.ModalResult := mrOK;
 end;
-
 procedure TDBFormConfig.Button2Click(Sender: TObject);
 begin
 DBFormConfig.ModalResult := mrCancel;
 end;
-
 end.

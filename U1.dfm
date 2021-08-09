@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'Form3'
-  ClientHeight = 269
-  ClientWidth = 850
+  ClientHeight = 271
+  ClientWidth = 892
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,7 +14,7 @@ object Form3: TForm3
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 761
+    Left = 577
     Top = 8
     Width = 82
     Height = 25
@@ -60,9 +60,9 @@ object Form3: TForm3
   object DBGrid2: TDBGrid
     Left = 0
     Top = 108
-    Width = 850
-    Height = 161
-    Align = alBottom
+    Width = 705
+    Height = 160
+    Align = alCustom
     DataSource = DataModule1.DataSource2
     ReadOnly = True
     TabOrder = 5
@@ -98,6 +98,7 @@ object Form3: TForm3
       item
         Expanded = False
         FieldName = 'D0B1'
+        Width = 65
         Visible = True
       end
       item
@@ -123,7 +124,7 @@ object Form3: TForm3
       item
         Expanded = False
         FieldName = 'IsCorrect'
-        Width = 80
+        Width = 56
         Visible = True
       end>
   end
@@ -135,6 +136,30 @@ object Form3: TForm3
     Caption = 'Poka'#380' tylko b'#322#281'dne'
     TabOrder = 6
     OnClick = CheckBox1Click
+  end
+  object DBGrid1: TDBGrid
+    Left = 697
+    Top = 0
+    Width = 288
+    Height = 268
+    DataSource = DataModule1.DetailSource
+    TabOrder = 7
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'IMPORT_ORDER_ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'REF_NS'
+        Visible = True
+      end>
   end
   object Timer1: TTimer
     Enabled = False

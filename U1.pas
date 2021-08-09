@@ -1,7 +1,5 @@
 unit U1;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
@@ -10,7 +8,6 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Grids, Vcl.DBGrids;
-
 type
   TForm3 = class(TForm)
     Button1: TButton;
@@ -24,6 +21,7 @@ type
     LinkControlToPropertyEnabled2: TLinkControlToProperty;
     DBGrid2: TDBGrid;
     CheckBox1: TCheckBox;
+    DBGrid1: TDBGrid;
     procedure Button1Click(Sender: TObject);
     procedure ConfigButtonClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -39,9 +37,7 @@ type
   end;
 var
   Form3: TForm3;
-
 implementation
-
 {$R *.dfm}
 uses DataModule,UnitDBConfig;
 procedure TForm3.Button1Click(Sender: TObject);
@@ -51,6 +47,7 @@ begin
   DataModule1.IBQuery1.Close;
   DataModule1.IBQuery1.Open;
   DataModule1.ClientDataSet1.EmptyDataSet;
+  DataModule1.DetailDataSet.EmptyDataSet;
 while not DataModule1.IBQuery1.Eof do
 try
  DataModule1.ClientDataSet1.Insert;
@@ -68,6 +65,7 @@ try
  var CorrectCount := 0;
  var TotalCount := 0;
  while not DataModule1.IBQuery2.Eof do
+ begin
  try
     var Opis : string;
     Opis := DataModule1.IBQuery2OP.AsString;
@@ -86,14 +84,34 @@ try
          if OutputStrings.Count-1=DataModule1.IBQuery2WAR_IN_DB.Value then
          CorrectCount := CorrectCount+1;}
          if WordCount=DataModule1.IBQuery2WAR_IN_DB.Value then
+         begin
          CorrectCount := CorrectCount+1;
+         TotalCount:=TotalCount+1;
+         end
+         else
+         begin
+           DataModule1.DetailDataSet.Insert;
+           DataModule1.DetailDataSetSID.Value := DataModule1.IBQuery1SID.AsInteger;
+           DataModule1.DetailDataSetIMPORT_ORDER_ID.Value := DataModule1.IBQuery2ID.AsInteger;
+           DataModule1.DetailDataSetREF_NS.Value := DataModule1.IBQuery2REF.AsInteger;
+           DataModule1.DetailDataSet.Post;
+         end;
        finally
          //OutputStrings.Free;
        end;
     end
-    else TotalCount:=TotalCount+1;
+    else
+    begin
+    TotalCount:=TotalCount+1;
+    DataModule1.DetailDataSet.Insert;
+    DataModule1.DetailDataSetSID.Value := DataModule1.IBQuery1SID.AsInteger;
+    DataModule1.DetailDataSetIMPORT_ORDER_ID.Value := DataModule1.IBQuery2ID.AsInteger;
+    DataModule1.DetailDataSetREF_NS.Value := DataModule1.IBQuery2REF.AsInteger;
+    DataModule1.DetailDataSet.Post;
+    end;
  finally
     DataModule1.IBQuery2.Next;
+ end;
  end;
  DataModule1.ClientDataSet1CorrectWar.Value := CorrectCount;
  if (TotalCount=CorrectCount) and (DataModule1.IBQuery1B.Value=1) then
@@ -106,12 +124,10 @@ end;
   end;
 end;
 
-
 procedure TForm3.Button2Click(Sender: TObject);
 begin
 DataModule1.IBQuery1.Open;
 end;
-
 procedure TForm3.CheckBox1Click(Sender: TObject);
 begin
 if CheckBox1.Checked then
@@ -125,7 +141,6 @@ else
     DBGrid2.DataSource.DataSet.Filtered:= False;
   end;
 end;
-
 procedure TForm3.ConfigButtonClick(Sender: TObject);
 begin
 var configform : TDBFormConfig;
@@ -142,14 +157,11 @@ begin
 if (Sender as TDBGrid).DataSource.DataSet.FieldByName('IsCorrect').Value=0 then
 (Sender as TDBGrid).Canvas.Brush.Color:=clRed;
 (Sender as TDBGrid).DefaultDrawColumnCell(Rect,DataCol,Column,State);
-
 end;
-
 procedure TForm3.EditIntervalChange(Sender: TObject);
 begin
 Timer1.Interval:=StrToInt(EditInterval.Text)*1000;
 end;
-
 procedure TForm3.Timer1Timer(Sender: TObject);
 begin
 try
@@ -159,5 +171,4 @@ finally
 Timer1.Enabled:=True;
 end;
 end;
-
 end.

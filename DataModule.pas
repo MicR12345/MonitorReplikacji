@@ -35,9 +35,15 @@ type
     ClientDataSet1D1B1: TIntegerField;
     ClientDataSet1D2B2: TIntegerField;
     ClientDataSet1IsCorrect: TIntegerField;
+    DetailDataSet: TClientDataSet;
+    DetailDataSetSID: TIntegerField;
+    DetailDataSetIMPORT_ORDER_ID: TIntegerField;
+    DetailDataSetREF_NS: TIntegerField;
     IBQuery2ID: TIntegerField;
     IBQuery2OP: TIBStringField;
     IBQuery2WAR_IN_DB: TIntegerField;
+    IBQuery2REF: TIntegerField;
+    DetailSource: TDataSource;
   private
     { Private declarations }
   public
