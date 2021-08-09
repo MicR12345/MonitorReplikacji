@@ -58,8 +58,14 @@ DataModule1.IBQuery1.ParamByName('DB2USER').Value := DB2UserEdit.Text;
 DataModule1.IBQuery1.ParamByName('DB2PASSWORD').Value := DB2PasswordEdit.Text;
 DataModule1.IBDatabase1.Open;
 DataModule1.IBQuery1.Open;
-DataModule1.ClientDataSet1.CreateDataSet;
-DataModule1.DetailDataSet.CreateDataSet;
+if not DataModule1.ClientDataSet1.Active then
+  DataModule1.ClientDataSet1.CreateDataSet
+else
+  DataModule1.ClientDataSet1.EmptyDataSet;
+if not DataModule1.DetailDataSet.Active then
+  DataModule1.DetailDataSet.CreateDataSet
+else
+  DataModule1.DetailDataSet.EmptyDataSet;
 TotalProgress.Max := 60000;
 TotalProgress.Show;
 DataModule1.IBQuery1.Last;
@@ -114,6 +120,7 @@ try
          end
          else
          begin
+           TotalCount:=TotalCount+1;
            DataModule1.DetailDataSet.Insert;
            DataModule1.DetailDataSetSID.Value := DataModule1.IBQuery1SID.AsInteger;
            DataModule1.DetailDataSetIMPORT_ORDER_ID.Value := DataModule1.IBQuery2ID.AsInteger;

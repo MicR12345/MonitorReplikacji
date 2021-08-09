@@ -16,13 +16,3 @@ begin
   Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.
-
-
-
-
-
-
-
-
-
-

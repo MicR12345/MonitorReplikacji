@@ -143,6 +143,7 @@ object Form3: TForm3
     Width = 288
     Height = 268
     DataSource = DataModule1.DetailSource
+    ReadOnly = True
     TabOrder = 7
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

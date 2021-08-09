@@ -90,6 +90,7 @@ try
          end
          else
          begin
+           TotalCount:=TotalCount+1;
            DataModule1.DetailDataSet.Insert;
            DataModule1.DetailDataSetSID.Value := DataModule1.IBQuery1SID.AsInteger;
            DataModule1.DetailDataSetIMPORT_ORDER_ID.Value := DataModule1.IBQuery2ID.AsInteger;
