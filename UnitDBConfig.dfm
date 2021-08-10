@@ -13,7 +13,7 @@ object DBFormConfig: TDBFormConfig
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
-  OnShow = FormShow
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -50,18 +50,6 @@ object DBFormConfig: TDBFormConfig
       ModalResult = 2
       TabOrder = 1
       OnClick = Button2Click
-    end
-    object TotalProgress: TProgressBar
-      Left = 97
-      Top = 8
-      Width = 232
-      Height = 33
-      Smooth = True
-      BarColor = clLime
-      BackgroundColor = clSilver
-      Step = 1
-      TabOrder = 2
-      Visible = False
     end
   end
   object DB0Group: TGroupBox

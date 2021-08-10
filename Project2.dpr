@@ -14,10 +14,3 @@ begin
   Application.CreateForm(TDBFormConfig, DBFormConfig);
   Application.Run;
 end.
-
-
-
-
-
-
-

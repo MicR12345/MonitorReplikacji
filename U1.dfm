@@ -168,6 +168,27 @@ object Form3: TForm3
         Visible = True
       end>
   end
+  object Button2: TButton
+    Left = 89
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Connect'
+    TabOrder = 8
+    OnClick = Button2Click
+  end
+  object TotalProgress: TProgressBar
+    Left = 8
+    Top = 46
+    Width = 232
+    Height = 33
+    Smooth = True
+    BarColor = clLime
+    BackgroundColor = clSilver
+    Step = 1
+    TabOrder = 9
+    Visible = False
+  end
   object Timer1: TTimer
     Enabled = False
     Interval = 30000
@@ -177,8 +198,8 @@ object Form3: TForm3
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
-    Left = 100
-    Top = 65533
+    Left = 540
+    Top = 13
     object LinkControlToPropertyEnabled: TLinkControlToProperty
       Category = 'Quick Bindings'
       Control = AutoRefreshCheckBox
