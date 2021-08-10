@@ -13,6 +13,7 @@ object DBFormConfig: TDBFormConfig
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel

@@ -33,6 +33,7 @@ type
     TotalProgress: TProgressBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,7 +43,7 @@ var
   DBFormConfig: TDBFormConfig;
 implementation
 {$R *.dfm}
-uses DataModule;
+uses DataModule, U1;
 procedure TDBFormConfig.Button1Click(Sender: TObject);
 begin
 DataModule1.IBDatabase1.Close;
@@ -56,6 +57,15 @@ DataModule1.IBQuery1.ParamByName('DB1PASSWORD').Value := DB1PasswordEdit.Text;
 DataModule1.IBQuery1.ParamByName('DB2CONNECTION').Value := DB2ConnectionEdit.Text;
 DataModule1.IBQuery1.ParamByName('DB2USER').Value := DB2UserEdit.Text;
 DataModule1.IBQuery1.ParamByName('DB2PASSWORD').Value := DB2PasswordEdit.Text;
+DataModule1.Connection1 := DB0ConnectionEdit.Text;
+DataModule1.Connection2 := DB1ConnectionEdit.Text;
+DataModule1.Connection3 := DB2ConnectionEdit.Text;
+DataModule1.User1 := DB0UserEdit.Text;
+DataModule1.User2 := DB1UserEdit.Text;
+DataModule1.User3 := DB2UserEdit.Text;
+DataModule1.Password1 := DB0PasswordEdit.Text;
+DataModule1.Password2 := DB1PasswordEdit.Text;
+DataModule1.Password3 := DB2PasswordEdit.Text;
 DataModule1.IBDatabase1.Open;
 DataModule1.IBQuery1.Open;
 if not DataModule1.ClientDataSet1.Active then
@@ -158,10 +168,33 @@ TotalProgress.Position :=0;
 DataModule1.DetailDataSet.IndexFieldNames := 'SID';
 DataModule1.DetailDataSet.MasterSource :=DataModule1.DataSource2;
 DataModule1.DetailDataSet.MasterFields := 'SID';
+DataModule1.ClientDataSet1.First;
 DBFormConfig.ModalResult := mrOK;
 end;
 procedure TDBFormConfig.Button2Click(Sender: TObject);
 begin
 DBFormConfig.ModalResult := mrCancel;
 end;
+procedure TDBFormConfig.FormShow(Sender: TObject);
+begin
+if DataModule1.Connection1<>'' then
+  DB0ConnectionEdit.Text := DataModule1.Connection1;
+if DataModule1.Connection2<>'' then
+  DB1ConnectionEdit.Text := DataModule1.Connection2;
+if DataModule1.Connection3<>'' then
+  DB2ConnectionEdit.Text := DataModule1.Connection3;
+if DataModule1.User1<>'' then
+  DB0UserEdit.Text := DataModule1.User1;
+if DataModule1.User2<>'' then
+  DB1UserEdit.Text := DataModule1.User2;
+if DataModule1.User3<>'' then
+  DB2UserEdit.Text := DataModule1.User3;
+if DataModule1.Password1<>'' then
+  DB0PasswordEdit.Text := DataModule1.Password1;
+if DataModule1.Password2<>'' then
+  DB1PasswordEdit.Text := DataModule1.Password2;
+if DataModule1.Password3<>'' then
+  DB2PasswordEdit.Text := DataModule1.Password3;
+end;
+
 end.

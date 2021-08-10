@@ -7,7 +7,7 @@ uses
   IBX.IBCustomDataSet, IBX.IBDatabase, Vcl.StdCtrls, IBX.IBUpdateSQL,
   System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
-  Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Grids, Vcl.DBGrids,System.IniFiles;
 type
   TForm3 = class(TForm)
     Button1: TButton;
@@ -30,9 +30,22 @@ type
     procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure CheckBox1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1TitleClick(Column: TColumn);
+    procedure DBGrid2TitleClick(Column: TColumn);
   private
     { Private declarations }
   public
+    Connection1: string;
+    Connection2: string;
+    Connection3: string;
+    User1: string;
+    User2: string;
+    User3: string;
+    Password1: string;
+    Password2: string;
+    Password3: string;
     { Public declarations }
   end;
 var
@@ -152,6 +165,32 @@ if configform.ModalResult=mrOK then
   end;
 end;
 
+procedure TForm3.DBGrid1TitleClick(Column: TColumn);
+begin
+if Column.FieldName = 'IMPORT_ORDER_ID' then
+  begin
+    if DataModule1.DetailDataSet.IndexName='ID_ASC' then
+    begin
+      DataModule1.DetailDataSet.IndexName:='ID_DESC';
+    end
+    else
+    begin
+      DataModule1.DetailDataSet.IndexName:='ID_ASC';
+    end;
+  end
+  else if Column.FieldName = 'REF_NS' then
+  begin
+    if DataModule1.DetailDataSet.IndexName='REFNS_ASC' then
+    begin
+      DataModule1.DetailDataSet.IndexName:='REFNS_DESC';
+    end
+    else
+    begin
+      DataModule1.DetailDataSet.IndexName:='REFNS_ASC';
+    end;
+  end;
+end;
+
 procedure TForm3.DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
   DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
@@ -159,10 +198,66 @@ if (Sender as TDBGrid).DataSource.DataSet.FieldByName('IsCorrect').Value=0 then
 (Sender as TDBGrid).Canvas.Brush.Color:=clRed;
 (Sender as TDBGrid).DefaultDrawColumnCell(Rect,DataCol,Column,State);
 end;
+procedure TForm3.DBGrid2TitleClick(Column: TColumn);
+begin
+if Column.FieldName = 'SID' then
+  begin
+    if DataModule1.ClientDataSet1.IndexName='ASCSID' then
+    begin
+      DataModule1.ClientDataSet1.IndexName:='DESCSID';
+    end
+    else
+    begin
+      DataModule1.ClientDataSet1.IndexName:='ASCSID';
+    end;
+  end;
+DataModule1.ClientDataSet1.First;
+end;
+
 procedure TForm3.EditIntervalChange(Sender: TObject);
 begin
 Timer1.Interval:=StrToInt(EditInterval.Text)*1000;
 end;
+procedure TForm3.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+ var
+   Ini: TIniFile;
+ begin
+   Ini := TIniFile.Create( ChangeFileExt( Application.ExeName, '.INI' ) );
+   try
+   //TODO
+   Ini.WriteString('Connection','ConnectionDB0',Connection1);
+   Ini.WriteString('Connection','ConnectionDB1',Connection2);
+   Ini.WriteString('Connection','ConnectionDB2',Connection3);
+   Ini.WriteString('User','UserDB0',User1);
+   Ini.WriteString('User','UserDB1',User2);
+   Ini.WriteString('User','UserDB2',User3);
+   finally
+     Ini.Free;
+   end;
+ end;
+end;
+
+procedure TForm3.FormCreate(Sender: TObject);
+begin
+var
+   Ini: TIniFile;
+ begin
+   Ini := TIniFile.Create( ChangeFileExt( Application.ExeName, '.INI' ) );
+   try
+   //TODO
+   Ini.ReadString('Connection','ConnectionDB0',Connection1);
+   Ini.ReadString('Connection','ConnectionDB1',Connection2);
+   Ini.ReadString('Connection','ConnectionDB2',Connection3);
+   Ini.ReadString('User','UserDB0',User1);
+   Ini.ReadString('User','UserDB1',User2);
+   Ini.ReadString('User','UserDB2',User3);
+   finally
+     Ini.Free;
+   end;
+end;
+end;
+
 procedure TForm3.Timer1Timer(Sender: TObject);
 begin
 try

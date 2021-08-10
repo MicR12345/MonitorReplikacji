@@ -1,11 +1,8 @@
 unit DataModule;
-
 interface
-
 uses
   System.SysUtils, System.Classes, Data.DB, IBX.IBDatabase, IBX.IBCustomDataSet,
   IBX.IBUpdateSQL, IBX.IBQuery, Datasnap.DBClient;
-
 type
   TDataModule1 = class(TDataModule)
     IBDatabase1: TIBDatabase;
@@ -47,17 +44,21 @@ type
   private
     { Private declarations }
   public
+    Connection1: string;
+    Connection2: string;
+    Connection3: string;
+    User1: string;
+    User2: string;
+    User3: string;
+    Password1: string;
+    Password2: string;
+    Password3: string;
     { Public declarations }
   end;
-
 var
   DataModule1: TDataModule1;
-
 implementation
-
 {%CLASSGROUP 'Vcl.Controls.TControl'}
-
 {$R *.dfm}
-
 
 end.

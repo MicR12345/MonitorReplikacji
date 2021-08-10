@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 0
   Top = 0
   Caption = 'Form3'
-  ClientHeight = 271
-  ClientWidth = 892
+  ClientHeight = 455
+  ClientWidth = 707
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,10 +11,12 @@ object Form3: TForm3
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 577
+    Left = 616
     Top = 8
     Width = 82
     Height = 25
@@ -61,7 +63,7 @@ object Form3: TForm3
     Left = 0
     Top = 108
     Width = 705
-    Height = 160
+    Height = 165
     Align = alCustom
     DataSource = DataModule1.DataSource2
     ReadOnly = True
@@ -72,6 +74,7 @@ object Form3: TForm3
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     OnDrawColumnCell = DBGrid2DrawColumnCell
+    OnTitleClick = DBGrid2TitleClick
     Columns = <
       item
         Expanded = False
@@ -138,10 +141,10 @@ object Form3: TForm3
     OnClick = CheckBox1Click
   end
   object DBGrid1: TDBGrid
-    Left = 697
-    Top = 0
-    Width = 288
-    Height = 268
+    Left = 0
+    Top = 272
+    Width = 705
+    Height = 185
     DataSource = DataModule1.DetailSource
     ReadOnly = True
     TabOrder = 7
@@ -150,15 +153,18 @@ object Form3: TForm3
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnTitleClick = DBGrid1TitleClick
     Columns = <
       item
         Expanded = False
         FieldName = 'IMPORT_ORDER_ID'
+        Width = 134
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'REF_NS'
+        Width = 103
         Visible = True
       end>
   end

@@ -1,5 +1,4 @@
 program Project2;
-
 uses
   Vcl.Forms,
   U1 in 'U1.pas' {Form3},
@@ -7,12 +6,18 @@ uses
   DataModule in 'DataModule.pas' {DataModule1: TDataModule};
 
 {$R *.res}
-
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm3, Form3);
-  Application.CreateForm(TDBFormConfig, DBFormConfig);
   Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TDBFormConfig, DBFormConfig);
   Application.Run;
 end.
+
+
+
+
+
+
+

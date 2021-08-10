@@ -130,7 +130,24 @@ object DataModule1: TDataModule1
   end
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <
+      item
+        Name = 'DESCSID'
+        Fields = 
+          'SID;Data;Import_Quantity;Order_Quantity;D0B1;D0B2;D1B1;D2B2;Corr' +
+          'ectWar;IsCorrect'
+        Options = [ixDescending]
+      end
+      item
+        Name = 'ASCSID'
+        Fields = 
+          'SID;Data;Import_Quantity;Order_Quantity;D0B1;D0B2;D1B1;D2B2;Corr' +
+          'ectWar;IsCorrect'
+      end>
+    IndexName = 'ASCSID'
     Params = <>
+    StoreDefs = True
     Left = 440
     Top = 120
     object ClientDataSet1SID: TIntegerField
@@ -204,7 +221,29 @@ object DataModule1: TDataModule1
   end
   object DetailDataSet: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <
+      item
+        Name = 'ID_ASC'
+        Fields = 'SID;IMPORT_ORDER_ID;REF_NS'
+      end
+      item
+        Name = 'ID_DESC'
+        Fields = 'SID;IMPORT_ORDER_ID;REF_NS'
+        Options = [ixDescending]
+      end
+      item
+        Name = 'REFNS_ASC'
+        Fields = 'SID;REF_NS;IMPORT_ORDER_ID'
+      end
+      item
+        Name = 'REFNS_DESC'
+        Fields = 'SID;REF_NS;IMPORT_ORDER_ID'
+        Options = [ixDescending]
+      end>
+    IndexName = 'ID_ASC'
     Params = <>
+    StoreDefs = True
     Left = 440
     Top = 224
     object DetailDataSetSID: TIntegerField
