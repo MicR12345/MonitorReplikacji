@@ -8,7 +8,7 @@ uses
   System.ImageList, Vcl.ImgList, Vcl.ExtCtrls, System.Rtti,
   System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.EngExt,
   Vcl.Bind.DBEngExt, Data.Bind.Components, Vcl.Grids, Vcl.DBGrids,System.IniFiles,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls,Vcl.Clipbrd,Vcl.Themes;
 type
   TForm3 = class(TForm)
     Button1: TButton;
@@ -25,6 +25,7 @@ type
     DBGrid1: TDBGrid;
     Button2: TButton;
     TotalProgress: TProgressBar;
+    ClipboardButton: TButton;
     procedure Button1Click(Sender: TObject);
     procedure ConfigButtonClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -37,6 +38,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBGrid1TitleClick(Column: TColumn);
     procedure DBGrid2TitleClick(Column: TColumn);
+    procedure ClipboardButtonClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -274,6 +276,33 @@ else
     DBGrid2.DataSource.DataSet.Filtered:= False;
   end;
 end;
+procedure TForm3.ClipboardButtonClick(Sender: TObject);
+begin
+ var currentSort := DataModule1.DetailDataSet.IndexName;
+ DataModule1.DetailDataSet.IndexName := 'ID_ASC';
+ DBGrid1.DataSource.DataSet.Filter := 'REF_NS = 0';
+ DBGrid1.DataSource.DataSet.Filtered :=True;
+ DBGrid1.DataSource.DataSet.First;
+ var copyString := '';
+ while not DBGrid1.DataSource.DataSet.Eof do
+ begin
+  try
+    if copyString<>'' then
+     copyString := copyString + ',';
+    if DBGrid1.DataSource.DataSet.FieldByName('IMPORT_ORDER_ID').AsString<>'' then
+    copyString := copyString + DBGrid1.DataSource.DataSet.FieldByName('IMPORT_ORDER_ID').AsString;
+  finally
+    DBGrid1.DataSource.DataSet.Next;
+  end;
+ end;
+ Clipboard.AsText := copyString;
+ DBGrid1.DataSource.DataSet.Filtered :=False;
+ DBGrid1.DataSource.DataSet.Filter := '';
+ if currentSort<>'' then
+  DataModule1.DetailDataSet.IndexName := currentSort
+ else DataModule1.DetailDataSet.IndexName := 'ID_ASC';
+end;
+
 procedure TForm3.ConfigButtonClick(Sender: TObject);
 begin
 var configform : TDBFormConfig;

@@ -1,7 +1,7 @@
 object Form3: TForm3
   Left = 0
   Top = 0
-  Caption = 'Form3'
+  Caption = 'Importy'
   ClientHeight = 455
   ClientWidth = 707
   Color = clBtnFace
@@ -54,9 +54,9 @@ object Form3: TForm3
   object AutoRefreshCheckBox: TCheckBox
     Left = 288
     Top = 8
-    Width = 105
+    Width = 121
     Height = 17
-    Caption = 'Auto Odswierzanie'
+    Caption = 'Auto Odswie'#380'anie'
     TabOrder = 4
   end
   object DBGrid2: TDBGrid
@@ -189,11 +189,20 @@ object Form3: TForm3
     TabOrder = 9
     Visible = False
   end
+  object ClipboardButton: TButton
+    Left = 616
+    Top = 64
+    Width = 83
+    Height = 25
+    Caption = 'Do schowka'
+    TabOrder = 10
+    OnClick = ClipboardButtonClick
+  end
   object Timer1: TTimer
     Enabled = False
     Interval = 30000
     OnTimer = Timer1Timer
-    Left = 400
+    Left = 416
   end
   object BindingsList1: TBindingsList
     Methods = <>

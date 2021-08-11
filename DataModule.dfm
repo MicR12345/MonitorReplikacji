@@ -240,6 +240,9 @@ object DataModule1: TDataModule1
         Name = 'REFNS_DESC'
         Fields = 'SID;REF_NS;IMPORT_ORDER_ID'
         Options = [ixDescending]
+      end
+      item
+        Name = 'DetailDataSetIndex5'
       end>
     IndexName = 'ID_ASC'
     Params = <>
